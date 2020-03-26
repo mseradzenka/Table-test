@@ -3,34 +3,16 @@ import { Component, OnInit } from '@angular/core';
 interface Country {
   name: string;
   flag: string;
-  area: number;
-  population: number;
 }
 
-const COUNTRIES: Country[] = [
+const tableData: Country[] = [
   {
-    name: 'Russia',
-    flag: 'f/f3/Flag_of_Russia.svg',
-    area: 17075200,
-    population: 146989754
+    name: '123',
+    flag: '312'
   },
   {
-    name: 'Canada',
-    flag: 'c/cf/Flag_of_Canada.svg',
-    area: 9976140,
-    population: 36624199
-  },
-  {
-    name: 'United States',
-    flag: 'a/a4/Flag_of_the_United_States.svg',
-    area: 9629091,
-    population: 324459463
-  },
-  {
-    name: 'China',
-    flag: 'f/fa/Flag_of_the_People%27s_Republic_of_China.svg',
-    area: 9596960,
-    population: 1409517397
+    name: '456',
+    flag: '5678'
   }
 ];
 
@@ -40,11 +22,20 @@ const COUNTRIES: Country[] = [
   styleUrls: ['./table.component.css']
 })
 export class TableComponent implements OnInit {
-  countries = COUNTRIES;
+  public data = tableData;
 
   constructor() { }
 
-  ngOnInit() {
+  public ngOnInit(): void {
+    console.log(this.data[0])
+  }
+
+  public getColumns(): any[] {
+    return Object.keys(this.data[0]);
+  }
+
+  public getCells(item): any {
+    return Object.values(item);
   }
 
 }

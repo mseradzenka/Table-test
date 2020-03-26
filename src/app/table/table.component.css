@@ -1,0 +1,14 @@
+.info-wrapper {
+  display: flex;
+  margin: 20px auto;
+}
+
+.info {
+  margin: auto;
+  color: #5d5d5d;
+}
+
+.table-wrapper {
+  display: flex;
+  margin: 2% 10%;
+}
