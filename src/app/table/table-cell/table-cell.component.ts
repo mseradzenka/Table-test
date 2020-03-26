@@ -5,6 +5,7 @@ import { select, Store } from '@ngrx/store';
 import { OnChanges } from '@angular/core';
 import { takeUntil, map } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { ChangeCell } from '../../store/actions/table.actions';
 
 @Component({
   selector: 'app-table-cell',
@@ -37,6 +38,11 @@ export class TableCellComponent implements OnChanges, OnInit, OnDestroy {
       )
       .subscribe((cellControl) => {
         console.log(cellControl || 0);
+        const payload = {
+          value: cellControl,
+          indexes: this.cellIndexes
+        };
+        this.store.dispatch(new ChangeCell(payload));
       })
   }
 
