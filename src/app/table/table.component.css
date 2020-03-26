@@ -1,6 +1,7 @@
 .info-wrapper {
   display: flex;
-  margin: 20px auto;
+  margin: 50px auto;
+  font-size: 20px;
 }
 
 .info {
@@ -10,5 +11,15 @@
 
 .table-wrapper {
   display: flex;
-  margin: 2% 10%;
+  margin: 5% 10%;
+}
+
+.table-block {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.add-column {
+  margin-left: 1rem;
 }

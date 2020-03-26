@@ -1,18 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
-interface Country {
-  name: string;
-  flag: string;
-}
-
-const tableData: Country[] = [
+const tableData: any[] = [
   {
-    name: '123',
-    flag: '312'
+    '1': '123',
+    '2': '312'
   },
   {
-    name: '456',
-    flag: '5678'
+    '1': '456',
+    '2': '5678'
   }
 ];
 
@@ -37,5 +32,4 @@ export class TableComponent implements OnInit {
   public getCells(item): any {
     return Object.values(item);
   }
-
 }

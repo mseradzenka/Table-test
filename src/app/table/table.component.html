@@ -1,28 +1,36 @@
 <div class="info-wrapper">
   <div class="info">
-    Use this table to add and remove rows and columns, change values in cells and calculate sum or multiplication of rows and columns
+    Use this table to add and remove rows and columns, change values in cells and calculate sum or multiplication of rows and columns.
   </div>
 </div>
 
 <div class="table-wrapper">
-  <table class="table table-striped">
-    <thead>
-    <tr>
-      <th scope="col">#</th>
-      <ng-container *ngFor="let column of getColumns(); index as i">
-        <th scope="col">{{ i + 1 }}</th>
-      </ng-container>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let row of data; index as i">
-      <th scope="row">{{ i + 1 }}</th>
-      <ng-container *ngFor="let cell of getCells(row); index as j">
-        <td>
-          {{ cell }}
-        </td>
-      </ng-container>
-    </tr>
-    </tbody>
-  </table>
+  <div class="table-block">
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <ng-container *ngFor="let column of getColumns(); index as i">
+          <th scope="col">{{ i + 1 }}</th>
+        </ng-container>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let row of data; index as i">
+        <th scope="row">{{ i + 1 }}</th>
+        <ng-container *ngFor="let cell of getCells(row); index as j">
+          <td>
+            {{ cell }}
+          </td>
+        </ng-container>
+      </tr>
+      </tbody>
+    </table>
+    <div class="add-row">
+      <button type="button" class="btn btn-outline-primary">Add row</button>
+    </div>
+  </div>
+  <div class="add-column">
+    <button type="button" class="btn btn-outline-primary">Add column</button>
+  </div>
 </div>
