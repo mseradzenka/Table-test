@@ -9,7 +9,7 @@
     <table class="table table-bordered">
       <thead>
       <tr>
-        <th scope="col">#</th>
+        <th scope="col" class="column-number">#</th>
         <ng-container *ngFor="let column of getColumns(); index as i">
           <th scope="col">{{ i + 1 }}</th>
         </ng-container>
@@ -17,10 +17,10 @@
       </thead>
       <tbody>
       <tr *ngFor="let row of data; index as i">
-        <th scope="row">{{ i + 1 }}</th>
+        <th scope="row" class="column-number">{{ i + 1 }}</th>
         <ng-container *ngFor="let cell of getCells(row); index as j">
           <td>
-            {{ cell }}
+            <app-table-cell [cellValue]="cell" ></app-table-cell>
           </td>
         </ng-container>
       </tr>
