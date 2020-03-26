@@ -18,6 +18,7 @@
     "@angular/platform-browser": "8.0.0",
     "@angular/platform-browser-dynamic": "8.0.0",
     "@angular/router": "8.0.0",
+    "@ngrx/store": "^9.0.0",
     "core-js": "2.6.9",
     "rxjs": "6.5.2",
     "tslib": "^1.11.1",
