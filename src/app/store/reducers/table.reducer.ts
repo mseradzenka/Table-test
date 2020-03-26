@@ -23,7 +23,7 @@ export const initialState: IState = {
   ]
 };
 
-export function mainReducer(state = initialState, action: TableAction): IState {
+export function tableReducer(state = initialState, action: TableAction): IState {
   const { payload, type } = action;
 
   switch (type) {

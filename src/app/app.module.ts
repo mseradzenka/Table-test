@@ -5,7 +5,7 @@ import { StoreModule } from '@ngrx/store';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TableModule } from './table/table.module';
-import { mainReducer } from './store/reducers/main.reducer';
+import { tableReducer } from './store/reducers/table.reducer';
 
 @NgModule({
   declarations: [
@@ -15,7 +15,7 @@ import { mainReducer } from './store/reducers/main.reducer';
     BrowserModule,
     AppRoutingModule,
     TableModule,
-    StoreModule.forRoot(mainReducer)
+    StoreModule.forRoot({ table: tableReducer })
   ],
   providers: [],
   bootstrap: [AppComponent]
