@@ -24,14 +24,6 @@ export class TableComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  public getColumns(): any[] {
-    return Object.keys(this.data[0]);
-  }
-
-  public getCells(item): any {
-    return Object.values(item);
-  }
-
   private initSelector(): void {
     this.store.select(getTableData)
       .pipe(takeUntil(this.destroy$))

@@ -2,7 +2,7 @@ import { createReducer, on } from '@ngrx/store';
 import { TableActionTypes } from '../actions/table.actions';
 
 interface IState {
-  tableData: any[];
+  tableData: number[][];
 }
 
 interface TableAction {
@@ -12,14 +12,9 @@ interface TableAction {
  
 export const initialState: IState = {
   tableData: [
-    {
-      '1': '123',
-      '2': '312'
-    },
-    {
-      '1': '456',
-      '2': '5678'
-    }
+    [1, 2],
+    [3, 4],
+    [5, 6]
   ]
 };
 

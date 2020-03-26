@@ -10,7 +10,7 @@
       <thead>
       <tr>
         <th scope="col" class="column-number">#</th>
-        <ng-container *ngFor="let column of getColumns(); index as i">
+        <ng-container *ngFor="let column of this.data[0]; index as i">
           <th scope="col">{{ i + 1 }}</th>
         </ng-container>
       </tr>
@@ -18,7 +18,7 @@
       <tbody>
       <tr *ngFor="let row of data; index as i">
         <th scope="row" class="column-number">{{ i + 1 }}</th>
-        <ng-container *ngFor="let cell of getCells(row); index as j">
+        <ng-container *ngFor="let cell of row; index as j">
           <td>
             <app-table-cell [cellValue]="cell" ></app-table-cell>
           </td>
@@ -37,5 +37,5 @@
 
 <div class="action-buttons">
       <button type="button" class="btn btn-primary action-button">Sum rows</button>
-      <button type="button" class="btn btn-primary action-button">Sum columns</button>
+      <button type="button" class="btn btn-primary action-button">Multiply rows</button>
 </div>
