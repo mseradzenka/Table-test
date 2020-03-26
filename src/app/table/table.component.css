@@ -54,3 +54,7 @@ th:hover .column-number {
   opacity: 0;
   z-index: 0;
 }
+
+.result-row {
+  border: 3px solid #dee2e6;
+}

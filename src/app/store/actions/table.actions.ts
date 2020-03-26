@@ -5,7 +5,9 @@ export enum TableActionTypes {
   AddColumn = '[Table] Add Column',
   ChangeCell = '[Table] Change Cell',
   DeleteRow = '[Table] Delete Row',
-  DeleteColumn = '[Table] Delete Column'
+  DeleteColumn = '[Table] Delete Column',
+  CountSum = '[Table] Count Sum',
+  CountMultiplication = '[Table] Count Multiplication'
 }
 
 export class AddRow implements Action {
@@ -29,4 +31,12 @@ export class DeleteRow implements Action {
 export class DeleteColumn implements Action {
   public readonly type = TableActionTypes.DeleteColumn;
   constructor(public payload: any) { }
+}
+
+export class CountSum implements Action {
+  public readonly type = TableActionTypes.CountSum;
+}
+
+export class CountMultiplication implements Action {
+  public readonly type = TableActionTypes.CountMultiplication;
 }

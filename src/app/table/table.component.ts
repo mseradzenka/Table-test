@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { getTableData } from '../store/selectors/table.selectors';
-import { takeUntil } from 'rxjs/operators';
+import { getTableData, getCountedResult } from '../store/selectors/table.selectors';
+import { takeUntil, filter } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { AddRow, AddColumn, DeleteRow, DeleteColumn } from '../store/actions/table.actions';
+import { AddRow, AddColumn, DeleteRow, DeleteColumn, CountSum, CountMultiplication } from '../store/actions/table.actions';
 
 @Component({
   selector: 'app-table',
@@ -11,13 +11,14 @@ import { AddRow, AddColumn, DeleteRow, DeleteColumn } from '../store/actions/tab
   styleUrls: ['./table.component.css']
 })
 export class TableComponent implements OnInit, OnDestroy {
-  public data: any[];
+  public data: number[][];
+  public countedData: number[];
   private destroy$: Subject<any> = new Subject;
 
   constructor(private store: Store<any>) { }
 
   public ngOnInit(): void {
-    this.initSelector();
+    this.initSelectors();
   }
 
   public ngOnDestroy(): void {
@@ -49,12 +50,24 @@ export class TableComponent implements OnInit, OnDestroy {
     }
   }
 
-  private initSelector(): void {
+  public sumRows(): void {
+    this.store.dispatch(new CountSum());
+  }
+
+  public multiplyRows(): void {
+    this.store.dispatch(new CountMultiplication());
+  }
+
+  private initSelectors(): void {
     this.store.select(getTableData)
       .pipe(takeUntil(this.destroy$))
-      .subscribe(data => {
-        this.data = data;
-      });
+      .subscribe(data => this.data = [...data]);
+
+    this.store.select(getCountedResult)
+      .pipe(
+        takeUntil(this.destroy$)
+      )
+      .subscribe(data => this.countedData =  data ? [...data] : null);
   }
 
   private showDeleteWarning(): void {

@@ -2,7 +2,8 @@ import { createReducer, on } from '@ngrx/store';
 import { TableActionTypes } from '../actions/table.actions';
 
 interface IState {
-  tableData: any[];
+  tableData: number[][];
+  countedResult: number[];
 }
 
 interface TableAction {
@@ -14,7 +15,8 @@ export const initialState: IState = {
   tableData: [
     [1, 2],
     [3, 4]
-  ]
+  ],
+  countedResult: null
 };
 
 export function tableReducer(state = initialState, action: TableAction): IState {
@@ -27,13 +29,17 @@ export function tableReducer(state = initialState, action: TableAction): IState 
       const newRow = tableData[0].map(() => 0);
 
       return {
-        tableData: [...tableData, newRow]
+        ...state,
+        tableData: [...tableData, newRow],
+        countedResult: null
       };
     }
 
     case TableActionTypes.AddColumn: {
       return {
-        tableData: [...tableData.map(row => [...row, 0])]
+        ...state,
+        tableData: [...tableData.map(row => [...row, 0])],
+        countedResult: null
       };
     }
 
@@ -41,7 +47,9 @@ export function tableReducer(state = initialState, action: TableAction): IState 
       tableDataCopy.splice(payload, 1);
 
       return {
-        tableData: [...tableDataCopy]
+        ...state,
+        tableData: [...tableDataCopy],
+        countedResult: null
       };
     }
 
@@ -52,7 +60,9 @@ export function tableReducer(state = initialState, action: TableAction): IState 
       });
 
       return {
-        tableData: [...data]
+        ...state,
+        tableData: [...data],
+        countedResult: null
       };
     }
 
@@ -61,8 +71,42 @@ export function tableReducer(state = initialState, action: TableAction): IState 
       tableDataCopy[rowIndex][cellIndex] = value;
 
       return {
-        tableData: [...tableDataCopy]
-      }
+        ...state,
+        tableData: [...tableDataCopy],
+        countedResult: null
+      };
+    }
+
+    case TableActionTypes.CountSum: {
+      const countedResult = tableDataCopy[0].reduce((sumArray: number[], cell: number, index: number) => {
+        const sum = tableDataCopy.reduce((acc, curr) => {
+          acc += curr[index];
+          return acc;
+        }, 0);
+        sumArray.push(sum);
+        return sumArray;
+      }, []);
+
+      return {
+        ...state,
+        countedResult
+      };
+    }
+
+    case TableActionTypes.CountMultiplication: {
+      const countedResult = tableDataCopy[0].reduce((sumArray: number[], cell: number, index: number) => {
+        const sum = tableDataCopy.reduce((acc, curr) => {
+          acc *= curr[index];
+          return acc;
+        }, 1);
+        sumArray.push(sum);
+        return sumArray;
+      }, []);
+
+      return {
+        ...state,
+        countedResult
+      };
     }
 
     default:

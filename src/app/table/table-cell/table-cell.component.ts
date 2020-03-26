@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 import { OnChanges } from '@angular/core';
-import { takeUntil, map } from 'rxjs/operators';
+import { takeUntil, map, debounceTime, distinctUntilChanged, withLatestFrom } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { ChangeCell } from '../../store/actions/table.actions';
 
@@ -18,7 +18,7 @@ export class TableCellComponent implements OnChanges, OnInit, OnDestroy {
 
   public regexPattern = /\-?\d*\.?\d{1,2}/;
   public group: FormGroup;
-  public destroy$: Subject<any> = new Subject;
+  public destroy$: Subject<void> = new Subject;
 
   constructor(
     private fb: FormBuilder,
@@ -38,17 +38,23 @@ export class TableCellComponent implements OnChanges, OnInit, OnDestroy {
 
   private initFormGroup(): void {
     this.group = this.fb.group({
-      cellControl: [this.cellValue || 0, Validators.pattern(this.regexPattern)]
+      cellControl: [this.cellValue || 0, {
+        validators: [Validators.pattern(this.regexPattern)],
+        updateOn: "blur"
+      }]
     });
 
-    this.group.valueChanges
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(({ cellControl }) => {
+    this.group.get('cellControl').valueChanges
+      .pipe(
+        distinctUntilChanged(),
+        takeUntil(this.destroy$)
+      )
+      .subscribe(cellControl => {
         const payload = {
           value: cellControl || 0,
           indexes: this.cellIndexes
         };
         this.store.dispatch(new ChangeCell(payload));
-      })
+      });
   }
 }
