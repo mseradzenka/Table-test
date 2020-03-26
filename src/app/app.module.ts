@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TableModule } from './table/table.module';
 import { tableReducer } from './store/reducers/table.reducer';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,8 @@ import { tableReducer } from './store/reducers/table.reducer';
     BrowserModule,
     AppRoutingModule,
     TableModule,
+    FormsModule,
+    ReactiveFormsModule,
     StoreModule.forRoot({ table: tableReducer })
   ],
   providers: [],
