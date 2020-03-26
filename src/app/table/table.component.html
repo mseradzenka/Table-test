@@ -1,6 +1,6 @@
 <div class="info-wrapper">
   <div class="info">
-    Use this table to add and remove rows and columns, change values in cells and calculate sum or multiplication of rows and columns.
+    Use this table to add and remove rows and columns, change values in cells and calculate sum or multiplication of values in columns.
   </div>
 </div>
 
@@ -11,27 +11,48 @@
       <tr>
         <th scope="col" class="column-number">#</th>
         <ng-container *ngFor="let column of this.data[0]; index as i">
-          <th scope="col">{{ i + 1 }}</th>
+          <th scope="col">
+            <button type="button"
+                class="close delete"
+                aria-label="Close"
+                (click)="deleteColumn(i)">
+             <span aria-hidden="true">&times;</span>
+            </button>
+            <span class="column-number">{{ i + 1 }}</span>
+          </th>
         </ng-container>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let row of data; index as i">
-        <th scope="row" class="column-number">{{ i + 1 }}</th>
+        <th scope="row" class="column-number">
+          <button type="button"
+              class="close delete"
+              aria-label="Close"
+              (click)="deleteRow(i)">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <span class="row-number">{{ i + 1 }}</span>
+        </th>
         <ng-container *ngFor="let cell of row; index as j">
           <td>
-            <app-table-cell [cellValue]="cell" ></app-table-cell>
+            <app-table-cell [cellValue]="cell"
+              [cellIndexes]="{ rowIndex: i, cellIndex: j }"></app-table-cell>
           </td>
         </ng-container>
       </tr>
       </tbody>
     </table>
     <div class="add-row">
-      <button type="button" class="btn btn-outline-primary">Add row</button>
+      <button type="button"
+        class="btn btn-outline-primary"
+        (click)="addRow()">Add row</button>
     </div>
   </div>
   <div class="add-column">
-    <button type="button" class="btn btn-outline-primary">Add column</button>
+    <button type="button"
+      class="btn btn-outline-primary"
+      (click)="addColumn()">Add column</button>
   </div>
 </div>
 

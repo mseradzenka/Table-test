@@ -32,3 +32,25 @@
 .action-button {
   margin: 0 10px;
 }
+
+.table td, .table th {
+  padding: .5rem;
+}
+
+.delete {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+th:hover .delete {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 1000;
+}
+
+th:hover .row-number,
+th:hover .column-number {
+  opacity: 0;
+  z-index: 0;
+}
